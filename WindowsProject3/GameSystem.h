@@ -3,6 +3,7 @@
 #include "Graphic.h"
 #include "Scene.h"
 #include "GameScene.h"
+#include "MainScene.h"
 
 enum SCENETYPE
 {
@@ -16,11 +17,16 @@ class GameSystem
 {
 private:
 	Scene* scene = nullptr;
+	int current_s_number;
+public:
+	static bool GameExit;
+	static int change_s_number;
 public:
 	void Init();
 	void Update();
 	void Render();
 	void Release();
 	void SetScene(int scenenumber);
+	void SceneChangeCheck();
 };
 

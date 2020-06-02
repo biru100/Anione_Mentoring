@@ -60,6 +60,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Graphic::BeginDraw();
             gs.Render();
             Graphic::EndDraw();
+            gs.SceneChangeCheck();
+            if (GameSystem::GameExit)
+            {
+                break;
+            }
         }
     }
     gs.Release();

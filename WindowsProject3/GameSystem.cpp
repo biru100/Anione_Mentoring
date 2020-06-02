@@ -1,8 +1,10 @@
 #include "GameSystem.h"
 
+bool GameSystem::GameExit = false;
+int GameSystem::change_s_number;
 void GameSystem::Init()
 {
-	SetScene(SCENETYPE::GAME);
+	SetScene(SCENETYPE::MAIN);
 }
 
 void GameSystem::Update()
@@ -23,6 +25,8 @@ void GameSystem::Release()
 
 void GameSystem::SetScene(int scenenumber)
 {
+	current_s_number = scenenumber;
+	change_s_number = scenenumber;
 	if (scene != nullptr)
 	{
 		scene->Release();
@@ -33,12 +37,20 @@ void GameSystem::SetScene(int scenenumber)
 	case SCENETYPE::GAME:
 		scene = new GameScene();
 		break;
-	case SCENETYPE::INTRO:
-
+	case SCENETYPE::MAIN:
+		scene = new MainScene();
 		break;
 	}
 	if (scene != nullptr)
 	{
 		scene->Init();
+	}
+}
+
+void GameSystem::SceneChangeCheck()
+{
+	if (current_s_number != change_s_number)
+	{
+		SetScene(change_s_number);
 	}
 }
